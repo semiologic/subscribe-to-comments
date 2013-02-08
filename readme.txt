@@ -1,5 +1,5 @@
 === Subscribe to Comments ===
-Contributors: markjaquith
+Contributors: markjaquith, Mike Koepke
 Tags: semiologic
 Requires at least: 2.8
 Tested up to: 3.2.1
@@ -14,6 +14,13 @@ Subscribe to Comments enables commenters to sign up for e-mail notification of s
 
 
 == Change Log ==
+
+= 2.7 =
+
+= WP 3.5 compat
+- Fix broken subscription reports yielding permissions errors
+- Fix variety of php lint warnings
+- Fix unknown index warnings
 
 = 2.6.1 =
 

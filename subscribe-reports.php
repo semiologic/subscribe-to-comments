@@ -54,27 +54,28 @@ function VSI_function_options() {
 		update_post_cache($subscribed);
 
 		echo '<p>'
-			. '<a href="' . trailingslashit(site_url()) . 'wp-admin/edit.php?page=wp-subscribed.php">'
+			. '<a href="' . trailingslashit(site_url()) . 'wp-admin/tools.php?page=subscribe-to-comments/subscribe-reports.php">'
 			. __('All Posts')
 			. '</a>'
 			. '</p>';
 
 		$sub = current($subscribed);
-
-		echo '<h3>'
-			. '<span style="font-size: 10pt; font-weight: normal;">'
-			. date('M d, Y', strtotime($sub->post_date))
-			. '</span>'
-			. '<br />'
-			. '<a href="' . apply_filters('the_permalink', get_permalink($sub->ID)) . '">'
-			. $sub->post_title
-			. '</a>'
-			. '<span style="font-size: 10pt; font-weight: normal;">'
-			. ' ('
-			. $sub->sub_count
-			. ')'
-			. '</span>'
-			. '</h3>';
+        if (!empty($sub)) {
+            echo '<h3>'
+                . '<span style="font-size: 10pt; font-weight: normal;">'
+                . date('M d, Y', strtotime($sub->post_date))
+                . '</span>'
+                . '<br />'
+                . '<a href="' . apply_filters('the_permalink', get_permalink($sub->ID)) . '">'
+                . $sub->post_title
+                . '</a>'
+                . '<span style="font-size: 10pt; font-weight: normal;">'
+                . ' ('
+                . $sub->sub_count
+                . ')'
+                . '</span>'
+                . '</h3>';
+        }
 
 		echo '<ul>';
 
