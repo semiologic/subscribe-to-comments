@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Subscribe To Comments
-Version: 2.7 fork
+Version: 2.7.1 fork
 Plugin URI: http://txfx.net/code/wordpress/subscribe-to-comments/
 Description: Allows readers to receive notifications of new comments that are posted to an entry.  Based on version 1 from <a href="http://scriptygoddess.com/">Scriptygoddess</a>
 Author: Mark Jaquith
@@ -287,7 +287,7 @@ class sg_subscribe {
 
 		foreach ( $defaults as $key => $val )
 		{
-			if ( @ $this->settings[$key] != $val )
+			if ( isset($this->settings[$key]) && $this->settings[$key] != $val )
 			{
 				$this->settings[$key] = $val;
 				$changed = true;
@@ -649,33 +649,35 @@ class sg_subscribe {
 		global $wpdb;
 		$cid = (int) $cid;
 		$comment = $wpdb->get_row("SELECT * FROM $wpdb->comments WHERE comment_ID='$cid' LIMIT 1");
-		$post = $wpdb->get_row("SELECT * FROM $wpdb->posts WHERE ID='$comment->comment_post_ID' LIMIT 1");
+        if (!empty($comment)) {
+            $post = $wpdb->get_row("SELECT * FROM $wpdb->posts WHERE ID='$comment->comment_post_ID' LIMIT 1");
 
-		if ( $comment->comment_approved == '1' && $comment->comment_type == '' ) {
-			// Comment has been approved and isn't a trackback or a pingback, so we should send out notifications
+            if ( $comment->comment_approved == '1' && $comment->comment_type == '' ) {
+                // Comment has been approved and isn't a trackback or a pingback, so we should send out notifications
 
-			$message  = sprintf(__("There is a new comment on the post \"%s\"", 'subscribe-to-comments') . ". \n%s\n\n", stripslashes($post->post_title), get_permalink($comment->comment_post_ID));
-			$message .= sprintf(__("Author: %s\n", 'subscribe-to-comments'), $comment->comment_author);
-			$message .= __("Comment:\n", 'subscribe-to-comments') . stripslashes($comment->comment_content) . "\n\n";
-			$message .= __("See all comments on this post here:\n", 'subscribe-to-comments');
-			$message .= get_permalink($comment->comment_post_ID) . "#comments\n\n";
-			//add link to manage comment notifications
-			$message .= __("To manage your subscriptions or to block all notifications from this site, click the link below:\n", 'subscribe-to-comments');
-			$message .= get_option('home') . '/?wp-subscription-manager=1&email=[email]&key=[key]';
+                $message  = sprintf(__("There is a new comment on the post \"%s\"", 'subscribe-to-comments') . ". \n%s\n\n", stripslashes($post->post_title), get_permalink($comment->comment_post_ID));
+                $message .= sprintf(__("Author: %s\n", 'subscribe-to-comments'), $comment->comment_author);
+                $message .= __("Comment:\n", 'subscribe-to-comments') . stripslashes($comment->comment_content) . "\n\n";
+                $message .= __("See all comments on this post here:\n", 'subscribe-to-comments');
+                $message .= get_permalink($comment->comment_post_ID) . "#comments\n\n";
+                //add link to manage comment notifications
+                $message .= __("To manage your subscriptions or to block all notifications from this site, click the link below:\n", 'subscribe-to-comments');
+                $message .= get_option('home') . '/?wp-subscription-manager=1&email=[email]&key=[key]';
 
-			$subject = sprintf(__('New Comment On: %s', 'subscribe-to-comments'), stripslashes($post->post_title));
+                $subject = sprintf(__('New Comment On: %s', 'subscribe-to-comments'), stripslashes($post->post_title));
 
-			$subscriptions = $this->subscriptions_from_post($comment->comment_post_ID);
-            if (is_array($subscriptions)) {
-                foreach ( (array) $subscriptions as $email ) {
-                    if ( !$this->is_blocked($email->comment_author_email) && $email->comment_author_email != $comment->comment_author_email && is_email($email->comment_author_email) ) {
-                            $message_final = str_replace('[email]', urlencode($email->comment_author_email), $message);
-                            $message_final = str_replace('[key]', $this->generate_key($email->comment_author_email), $message_final);
-                        $this->send_mail($email->comment_author_email, $subject, $message_final);
-                    }
-                } // foreach subscription
-            }
-		} // end if comment approved
+                $subscriptions = $this->subscriptions_from_post($comment->comment_post_ID);
+                if (is_array($subscriptions)) {
+                    foreach ( (array) $subscriptions as $email ) {
+                        if ( !$this->is_blocked($email->comment_author_email) && $email->comment_author_email != $comment->comment_author_email && is_email($email->comment_author_email) ) {
+                                $message_final = str_replace('[email]', urlencode($email->comment_author_email), $message);
+                                $message_final = str_replace('[key]', $this->generate_key($email->comment_author_email), $message_final);
+                            $this->send_mail($email->comment_author_email, $subject, $message_final);
+                        }
+                    } // foreach subscription
+                }
+            } // end if comment approved
+        }
 		return $cid;
 	}
 
