@@ -1,8 +1,8 @@
 === Subscribe to Comments ===
-Contributors: markjaquith, Mike Koepke
-Tags: semiologic
+Contributors: markjaquith
+Tags: semiologic, comments
 Requires at least: 2.8
-Tested up to: 3.2.1
+Tested up to: 3.5.1
 Stable tag: trunk
 
 Allows commenters on an entry to subscribe to e-mail notifications for subsequent comments.
