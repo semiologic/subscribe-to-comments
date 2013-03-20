@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Subscribe To Comments
-Version: 2.7.1 fork
+Version: 2.7.2 fork
 Plugin URI: http://txfx.net/code/wordpress/subscribe-to-comments/
 Description: Allows readers to receive notifications of new comments that are posted to an entry.  Based on version 1 from <a href="http://scriptygoddess.com/">Scriptygoddess</a>
 Author: Mark Jaquith
@@ -481,7 +481,7 @@ class sg_subscribe {
 		$previously_subscribed = ( $wpdb->get_var("SELECT comment_subscribe from $wpdb->comments WHERE comment_post_ID = '$postid' AND LCASE(comment_author_email) = '$email' AND comment_subscribe = 'Y' LIMIT 1") || in_array(stripslashes($email), (array) get_post_meta($postid, '_sg_subscribe-to-comments')) ) ? true : false;
 
 		// If user wants to be notified or has previously subscribed, set the flag on this current comment
-		if (($_POST['subscribe'] == 'subscribe' && is_email($email)) || $previously_subscribed) {
+		if ((isset($_POST['subscribe']) && $_POST['subscribe'] == 'subscribe' && is_email($email)) || $previously_subscribed) {
 			delete_post_meta($postid, '_sg_subscribe-to-comments', stripslashes($email));
 			$wpdb->query("UPDATE $wpdb->comments SET comment_subscribe = 'Y' where comment_post_ID = '$postid' AND LCASE(comment_author_email) = '$email'");
 		}

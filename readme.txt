@@ -15,6 +15,10 @@ Subscribe to Comments enables commenters to sign up for e-mail notification of s
 
 == Change Log ==
 
+= 2.7.2 =
+
+- Fix unknown index warnings
+
 = 2.7.1 =
 
 - Fix unknown index warnings
