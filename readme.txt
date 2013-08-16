@@ -2,7 +2,7 @@
 Contributors: markjaquith
 Tags: semiologic, comments
 Requires at least: 2.8
-Tested up to: 3.5.1
+Tested up to: 3.6
 Stable tag: trunk
 
 Allows commenters on an entry to subscribe to e-mail notifications for subsequent comments.
@@ -15,6 +15,14 @@ Subscribe to Comments enables commenters to sign up for e-mail notification of s
 
 == Change Log ==
 
+= 2.8
+
+- WP 3.6 compat
+- Fix 3.6 deprecated warnings
+- Fix PHP 5.4 Strict errors
+- Fixed Subscribe without comment broken by early fix
+- Some general file maintainability work
+
 = 2.7.2 =
 
 - Fix unknown index warnings
@@ -25,7 +33,7 @@ Subscribe to Comments enables commenters to sign up for e-mail notification of s
 
 = 2.7 =
 
-= WP 3.5 compat
+- WP 3.5 compat
 - Fix broken subscription reports yielding permissions errors
 - Fix variety of php lint warnings
 - Fix unknown index warnings
