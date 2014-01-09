@@ -192,4 +192,3 @@ function VSI_dash_report() {
 }
 
 add_action('activity_box_end','VSI_dash_report');
-?>
