@@ -2,7 +2,7 @@
 Contributors: markjaquith, Mike_Koepke
 Tags: semiologic, comments
 Requires at least: 2.8
-Tested up to: 3.9
+Tested up to: 4.0
 Stable tag: trunk
 
 Allows commenters on an entry to subscribe to e-mail notifications for subsequent comments.
@@ -14,6 +14,10 @@ Subscribe to Comments enables commenters to sign up for e-mail notification of s
 
 
 == Change Log ==
+
+= 2.8.3 =
+
+- WP 4.0 compat
 
 = 2.8.2
 
