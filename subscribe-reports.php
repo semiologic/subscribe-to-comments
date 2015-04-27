@@ -140,7 +140,7 @@ function VSI_function_options() {
 				. date('M d, Y', strtotime($sub->post_date))
 				. '</span>'
 				. '<br />'
-				. '<a href="' . str_replace('/wp-admin/?', '/wp-admin/edit.php?', add_query_arg('post_id', $sub->ID)) . '">'
+				. '<a href="' . str_replace('/wp-admin/?', '/wp-admin/edit.php?', esc_url(add_query_arg('post_id', $sub->ID))) . '">'
 				. $sub->post_title
 				. '</a>'
 				. ' (' . $sub->sub_count . ')'

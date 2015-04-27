@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Subscribe To Comments
-Version: 2.8.3 fork
+Version: 2.8.4 fork
 Plugin URI: http://txfx.net/code/wordpress/subscribe-to-comments/
 Description: Allows readers to receive notifications of new comments that are posted to an entry.
 Author: Mark Jaquith
@@ -831,7 +831,7 @@ class sg_subscribe {
 			$link = add_query_arg('email', urlencode($email), $link);
 			$link = add_query_arg('key', $this->generate_key($email), $link);
 		}
-		$link = add_query_arg('ref', rawurlencode('http://' . $_SERVER['HTTP_HOST'] . esc_attr($_SERVER['REQUEST_URI'])), $link);
+		$link = esc_url(add_query_arg('ref', rawurlencode('http://' . $_SERVER['HTTP_HOST'] . esc_attr($_SERVER['REQUEST_URI'])), $link));
 		//$link = str_replace('+', '%2B', $link);
 		if ( $html )
 			$link = htmlentities($link);
