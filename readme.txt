@@ -1,11 +1,11 @@
-=== Subscribe to Comments ===
+=== Subscribe to Comments Reloaded ===
 Contributors: markjaquith, Mike_Koepke
 Tags: semiologic, comments
 Requires at least: 2.8
-Tested up to: 4.2
+Tested up to: 4.3
 Stable tag: trunk
 
-Allows commenters on an entry to subscribe to e-mail notifications for subsequent comments.
+Allows commenters on an entry to subscribe to e-mail notifications for subsequent comments. This is a fork of the popular Subscribe to Comments plugin.
 
 
 == Description ==
@@ -14,6 +14,11 @@ Subscribe to Comments enables commenters to sign up for e-mail notification of s
 
 
 == Change Log ==
+
+= 2.8.5 =
+
+- WP 4.3 compat
+- Tested against PHP 5.6
 
 = 2.8.4 =
 Security update: Escape URLs returned by add_query_arg and remove_query_arg

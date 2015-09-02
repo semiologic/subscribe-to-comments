@@ -1,7 +1,7 @@
 <?php
 /*
-Plugin Name: Subscribe To Comments
-Version: 2.8.4 fork
+Plugin Name: Subscribe To Comments Reloaded
+Version: 2.8.5 fork
 Plugin URI: http://txfx.net/code/wordpress/subscribe-to-comments/
 Description: Allows readers to receive notifications of new comments that are posted to an entry.
 Author: Mark Jaquith
